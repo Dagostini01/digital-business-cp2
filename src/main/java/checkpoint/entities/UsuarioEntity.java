@@ -3,7 +3,6 @@ package checkpoint.entities;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,9 +42,8 @@ public class UsuarioEntity {
 	}
 
 	public UsuarioEntity(String nome, String email, String nomeMae, String senha, String telefone,
-			LocalDate dataNascimento, String enderecoCompleto, String cpf, String rg, Boolean pep,
-			Double rendaMensal, Double patrimonio, LocalDate dataCadastro, LocalDate dataAtualizacao,
-			List<ProdutoEntity> produtos) {
+			LocalDate dataNascimento, String enderecoCompleto, String cpf, String rg, Boolean pep, Double rendaMensal,
+			Double patrimonio, LocalDate dataCadastro, LocalDate dataAtualizacao, List<ProdutoEntity> produtos) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -188,8 +186,8 @@ public class UsuarioEntity {
 		return pep;
 	}
 
-   public Boolean setPep(Boolean pep){
-       return this.pep = pep;
-   }
+	public Boolean setPep(Boolean pep) {
+		return this.pep = pep;
+	}
 
 }
