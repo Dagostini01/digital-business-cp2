@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuario_ck")
+@Table(name = "TB_USUARIO")
 
 public class UsuarioEntity {
 
@@ -29,7 +29,7 @@ public class UsuarioEntity {
 	private String enderecoCompleto;
 	private String cpf;
 	private String rg;
-	private Boolean pep;
+	private Boolean politicamenteExposto;
 	private Double rendaMensal;
 	private Double patrimonio;
 	private LocalDate dataCadastro;
@@ -54,7 +54,7 @@ public class UsuarioEntity {
 		this.enderecoCompleto = enderecoCompleto;
 		this.cpf = cpf;
 		this.rg = rg;
-		this.pep = pep;
+		this.politicamenteExposto = pep;
 		this.rendaMensal = rendaMensal;
 		this.patrimonio = patrimonio;
 		this.dataCadastro = dataCadastro;
@@ -182,12 +182,12 @@ public class UsuarioEntity {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
-	public Boolean getPep() {
-		return pep;
+	public Boolean getPoliticamenteExposto() {
+		return politicamenteExposto;
 	}
 
 	public Boolean setPep(Boolean pep) {
-		return this.pep = pep;
+		return this.politicamenteExposto = pep;
 	}
 
 }
