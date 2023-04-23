@@ -62,7 +62,7 @@ public class UsuarioController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteUsuarioEntity(@PathVariable Long id) {
 		try {
-			usrService.findById(id);
+			usrService.delete(id);
 			return ResponseEntity.ok("usuario removido com sucesso!");
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("usuario não foi removido, id não encontrado!");

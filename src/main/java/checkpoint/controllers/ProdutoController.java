@@ -4,11 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import checkpoint.entities.ProdutoEntity;
 import checkpoint.services.ProdutoService;
@@ -29,6 +25,30 @@ public class ProdutoController {
 	public ProdutoEntity inseririProduto(@RequestBody ProdutoEntity produto) {
 		return produtoService.inserirProduto(produto);
 
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<ProdutoEntity> alterarProduto(@RequestBody ProdutoEntity produtoAtualizado,
+															  @PathVariable Long id) {
+
+		ProdutoEntity novoProduto = produtoService.atualizarProduto(produtoAtualizado, id);
+		if (novoProduto != null) {
+			return ResponseEntity.ok(novoProduto);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deletarProduto(@PathVariable Long id) {
+		try {
+			produtoService.delete(id);
+			return ResponseEntity.ok("Produto deletado com sucesso");
+		} catch (Exception e){
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body("Produto nao encontrado");
+		}
 	}
 
 }

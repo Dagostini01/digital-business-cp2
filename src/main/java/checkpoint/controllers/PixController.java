@@ -1,7 +1,6 @@
 package checkpoint.controllers;
 
 import checkpoint.entities.PixEntity;
-import checkpoint.entities.UsuarioEntity;
 import checkpoint.services.PixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

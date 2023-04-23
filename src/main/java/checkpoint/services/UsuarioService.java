@@ -76,12 +76,12 @@ public class UsuarioService {
 	}
 
 	public void delete(Long id) {
+		Optional<UsuarioEntity> usuario = usuarioRepository.findById(id);
 		if (usuarioRepository.findById(id).isPresent()) {
-			usuarioRepository.deleteById(id);
+			usuario.get().setAtivo(false);
 		} else {
 			throw new IllegalArgumentException("usuario não foi removido, id não encontrado!");
 		}
-
 
 	}
 
