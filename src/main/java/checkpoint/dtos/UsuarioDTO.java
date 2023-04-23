@@ -1,21 +1,13 @@
-package checkpoint.entities;
+package checkpoint.dtos;
 
-//teste
 import java.time.LocalDate;
-import java.util.List;
 
-import javax.persistence.*;
+import checkpoint.entities.UsuarioEntity;
 
-@Entity
-@Table(name = "TB_USUARIO")
-public class UsuarioEntity {
+public class UsuarioDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_usuario")
 	private Long id;
 	private String nome;
-	@Column(unique = true)
 	private String email;
 	private String nomeMae;
 	private String senha;
@@ -30,25 +22,11 @@ public class UsuarioEntity {
 	private LocalDate dataCadastro;
 	private LocalDate dataAtualizacao;
 
-	@OneToMany(mappedBy = "usuario")
-	private List<ProdutoEntity> produtos;
-	/*
-	 * @OneToMany(mappedBy = "pix") private List<PixEntity> chavesPix;
-	 * 
-	 */
-
-	@OneToOne(mappedBy = "usuario")
-	@JoinColumn(name = "vl_saldo")
-	private SaldoEntity saldo;
-
-	public UsuarioEntity() {
-	}
-
-	public UsuarioEntity(String nome, String email, String nomeMae, String senha, String telefone,
-			LocalDate dataNascimento, String enderecoCompleto, String cpf, String rg, Boolean pep, Double rendaMensal,
-			Double patrimonio, LocalDate dataCadastro, LocalDate dataAtualizacao, List<ProdutoEntity> produtos,
-			List<PixEntity> chaves, SaldoEntity saldo) {
+	public UsuarioDTO(Long id, String nome, String email, String nomeMae, String senha, String telefone,
+			LocalDate dataNascimento, String enderecoCompleto, String cpf, String rg, Boolean politicamenteExposto,
+			Double rendaMensal, Double patrimonio, LocalDate dataCadastro, LocalDate dataAtualizacao) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.nomeMae = nomeMae;
@@ -58,22 +36,34 @@ public class UsuarioEntity {
 		this.enderecoCompleto = enderecoCompleto;
 		this.cpf = cpf;
 		this.rg = rg;
-		this.politicamenteExposto = pep;
+		this.politicamenteExposto = politicamenteExposto;
 		this.rendaMensal = rendaMensal;
 		this.patrimonio = patrimonio;
 		this.dataCadastro = dataCadastro;
 		this.dataAtualizacao = dataAtualizacao;
-		this.produtos = produtos;
-		// this.chavesPix = chaves;
-		this.saldo = saldo;
 	}
 
-	public List<ProdutoEntity> getProdutos() {
-		return produtos;
+	public UsuarioDTO() {
+		super();
 	}
 
-	public void setProdutos(List<ProdutoEntity> produtos) {
-		this.produtos = produtos;
+	public UsuarioDTO(UsuarioEntity usuario) {
+		super();
+		this.id = usuario.getId();
+		this.nome = usuario.getNome();
+		this.email = usuario.getEmail();
+		this.nomeMae = usuario.getNomeMae();
+		this.senha = usuario.getSenha();
+		this.telefone = usuario.getTelefone();
+		this.dataNascimento = usuario.getDataNascimento();
+		this.enderecoCompleto = usuario.getEnderecoCompleto();
+		this.cpf = usuario.getCpf();
+		this.rg = usuario.getRg();
+		this.politicamenteExposto = usuario.getPoliticamenteExposto();
+		this.rendaMensal = usuario.getRendaMensal();
+		this.patrimonio = usuario.getPatrimonio();
+		this.dataCadastro = usuario.getDataCadastro();
+		this.dataAtualizacao = usuario.getDataAtualizacao();
 	}
 
 	public Long getId() {
@@ -124,6 +114,14 @@ public class UsuarioEntity {
 		this.telefone = telefone;
 	}
 
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
 	public String getEnderecoCompleto() {
 		return enderecoCompleto;
 	}
@@ -148,6 +146,14 @@ public class UsuarioEntity {
 		this.rg = rg;
 	}
 
+	public Boolean getPep() {
+		return politicamenteExposto;
+	}
+
+	public void setPep(Boolean politicamenteExposto) {
+		this.politicamenteExposto = politicamenteExposto;
+	}
+
 	public Double getRendaMensal() {
 		return rendaMensal;
 	}
@@ -162,14 +168,6 @@ public class UsuarioEntity {
 
 	public void setPatrimonio(Double patrimonio) {
 		this.patrimonio = patrimonio;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public LocalDate getDataCadastro() {
@@ -188,27 +186,4 @@ public class UsuarioEntity {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
-	public Boolean getPoliticamenteExposto() {
-		return politicamenteExposto;
-	}
-
-	public Boolean setPoliticamenteExposto(Boolean politicamenteExposto) {
-		return this.politicamenteExposto = politicamenteExposto;
-	}
-	/*
-	 * 
-	 * public List<PixEntity> getChavesPix() { return chavesPix; }
-	 * 
-	 * public void setChavesPix(List<PixEntity> chavesPix) { this.chavesPix =
-	 * chavesPix; }
-	 * 
-	 */
-
-	public SaldoEntity getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(SaldoEntity saldo) {
-		this.saldo = saldo;
-	}
 }
