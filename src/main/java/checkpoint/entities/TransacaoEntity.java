@@ -1,5 +1,7 @@
 package checkpoint.entities;
 
+import checkpoint.enums.StatusTransacao;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -8,25 +10,37 @@ import java.util.Calendar;
 public class TransacaoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id_transacao")
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private StatusTransacao status;
-    private String descricao;
+    private String descricaoErro;
     private Calendar horaTranscao;
+    /*
+    @OneToMany
+    @JoinColumn(name="nome")
     private UsuarioEntity debitor;
-    private UsuarioEntity creditor;
+
+    @ManyToOne
+    @JoinColumn(name="chave_pix")
+    private PixEntity chavePix;
+
+     */
+
+    private Long idCreditor;
 
     public TransacaoEntity () {}
 
-    public TransacaoEntity(Long id, StatusTransacao status, String descricao, Calendar horaTranscao, UsuarioEntity debitor, UsuarioEntity creditor) {
+    public TransacaoEntity(Long id, StatusTransacao status, String descricaoErro, Calendar horaTranscao, UsuarioEntity debitor, PixEntity chavePix) {
         this.id = id;
         this.status = status;
-        this.descricao = descricao;
+        this.descricaoErro = descricaoErro;
         this.horaTranscao = horaTranscao;
-        this.debitor = debitor;
-        this.creditor = creditor;
+        //this.debitor = debitor;
+        //this.chavePix = chavePix;
     }
+
 
     public Long getId() {
         return id;
@@ -44,12 +58,12 @@ public class TransacaoEntity {
         this.status = status;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescricaoErro() {
+        return descricaoErro;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricaoErro(String descricaoErro) {
+        this.descricaoErro = descricaoErro;
     }
 
     public Calendar getHoraTranscao() {
@@ -60,6 +74,7 @@ public class TransacaoEntity {
         this.horaTranscao = horaTranscao;
     }
 
+    /*
     public UsuarioEntity getDebitor() {
         return debitor;
     }
@@ -68,11 +83,14 @@ public class TransacaoEntity {
         this.debitor = debitor;
     }
 
-    public UsuarioEntity getCreditor() {
-        return creditor;
+
+    public PixEntity getChavePix() {
+        return chavePix;
     }
 
-    public void setCreditor(UsuarioEntity creditor) {
-        this.creditor = creditor;
+    public void setChavePix(PixEntity chavePix) {
+        this.chavePix = chavePix;
     }
+
+     */
 }

@@ -1,4 +1,4 @@
-package checkpoint.entities;
+package checkpoint.enums;
 
 public enum StatusTransacao {
     SUCESSO, FALHA
