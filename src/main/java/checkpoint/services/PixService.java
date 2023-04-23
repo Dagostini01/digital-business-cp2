@@ -6,11 +6,19 @@ import checkpoint.repositories.PixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PixService {
 
     @Autowired
     private PixRepository pixRepository;
+
+    public List<PixEntity> findAll() {
+        List<PixEntity> pix = pixRepository.findAll();
+        return pix;
+    }
 
     public void cadastrarPix(PixEntity pix) throws ChaveJaCadastradaException{
         String valorChave = pix.getValor();

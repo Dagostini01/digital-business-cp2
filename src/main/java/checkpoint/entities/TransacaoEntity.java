@@ -3,6 +3,7 @@ package checkpoint.entities;
 import checkpoint.enums.StatusTransacao;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 @Entity
@@ -16,7 +17,7 @@ public class TransacaoEntity {
     @Enumerated(EnumType.STRING)
     private StatusTransacao status;
     private String descricaoErro;
-    private Calendar horaTranscao;
+    private LocalDate horaTranscao;
     @ManyToOne
     @JoinColumn(name="id_usuario")
     private PixEntity pixDebitor;
@@ -25,7 +26,7 @@ public class TransacaoEntity {
 
 
     public TransacaoEntity () {
-        this.horaTranscao = Calendar.getInstance();
+        this.horaTranscao = LocalDate.now();
     }
 
     public TransacaoEntity(Long id, double valorTransacao, StatusTransacao status, String descricaoErro,
@@ -34,7 +35,7 @@ public class TransacaoEntity {
         this.valorTransacao = valorTransacao;
         this.status = status;
         this.descricaoErro = descricaoErro;
-        this.horaTranscao = Calendar.getInstance();
+        this.horaTranscao = LocalDate.now();
         this.pixDebitor = pixDebitor;
         this.chavePixCreditor = chavePixCreditor;
     }
@@ -71,11 +72,11 @@ public class TransacaoEntity {
         this.descricaoErro = descricaoErro;
     }
 
-    public Calendar getHoraTranscao() {
+    public LocalDate getHoraTranscao() {
         return horaTranscao;
     }
 
-    public void setHoraTranscao(Calendar horaTranscao) {
+    public void setHoraTranscao(LocalDate horaTranscao) {
         this.horaTranscao = horaTranscao;
     }
 
