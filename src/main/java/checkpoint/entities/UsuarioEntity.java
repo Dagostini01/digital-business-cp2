@@ -1,4 +1,5 @@
 package checkpoint.entities;
+
 //teste
 import java.time.LocalDate;
 import java.util.List;
@@ -7,12 +8,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "TB_USUARIO")
-
 public class UsuarioEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id_usuario")
+	@Column(name = "id_usuario")
 	private Long id;
 	private String nome;
 	@Column(unique = true)
@@ -33,13 +33,12 @@ public class UsuarioEntity {
 	@OneToMany(mappedBy = "usuario")
 	private List<ProdutoEntity> produtos;
 	/*
-	@OneToMany(mappedBy = "pix")
-	private List<PixEntity> chavesPix;
-
+	 * @OneToMany(mappedBy = "pix") private List<PixEntity> chavesPix;
+	 * 
 	 */
 
 	@OneToOne(mappedBy = "usuario")
-	@JoinColumn(name="vl_saldo")
+	@JoinColumn(name = "vl_saldo")
 	private SaldoEntity saldo;
 
 	public UsuarioEntity() {
@@ -47,7 +46,8 @@ public class UsuarioEntity {
 
 	public UsuarioEntity(String nome, String email, String nomeMae, String senha, String telefone,
 			LocalDate dataNascimento, String enderecoCompleto, String cpf, String rg, Boolean pep, Double rendaMensal,
-			Double patrimonio, LocalDate dataCadastro, LocalDate dataAtualizacao, List<ProdutoEntity> produtos, List<PixEntity> chaves, SaldoEntity saldo) {
+			Double patrimonio, LocalDate dataCadastro, LocalDate dataAtualizacao, List<ProdutoEntity> produtos,
+			List<PixEntity> chaves, SaldoEntity saldo) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -64,7 +64,7 @@ public class UsuarioEntity {
 		this.dataCadastro = dataCadastro;
 		this.dataAtualizacao = dataAtualizacao;
 		this.produtos = produtos;
-		//this.chavesPix = chaves;
+		// this.chavesPix = chaves;
 		this.saldo = saldo;
 	}
 
@@ -196,15 +196,12 @@ public class UsuarioEntity {
 		return this.politicamenteExposto = politicamenteExposto;
 	}
 	/*
-
-	public List<PixEntity> getChavesPix() {
-		return chavesPix;
-	}
-
-	public void setChavesPix(List<PixEntity> chavesPix) {
-		this.chavesPix = chavesPix;
-	}
-
+	 * 
+	 * public List<PixEntity> getChavesPix() { return chavesPix; }
+	 * 
+	 * public void setChavesPix(List<PixEntity> chavesPix) { this.chavesPix =
+	 * chavesPix; }
+	 * 
 	 */
 
 	public SaldoEntity getSaldo() {
