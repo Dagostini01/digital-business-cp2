@@ -17,5 +17,10 @@ public class ProdutoService {
 	public List<ProdutoEntity> getProduts() {
 		return produtoRepository.findAll();
 	}
+	
+	public ProdutoEntity inserirProduto(ProdutoEntity produto) {
+		return produtoRepository.save(produto);
+
+	}
 
 }
