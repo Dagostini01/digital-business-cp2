@@ -12,35 +12,32 @@ public class TransacaoEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_transacao")
     private Long id;
-
+    private double valorTransacao;
     @Enumerated(EnumType.STRING)
     private StatusTransacao status;
     private String descricaoErro;
     private Calendar horaTranscao;
-    /*
-    @OneToMany
-    @JoinColumn(name="nome")
-    private UsuarioEntity debitor;
-
     @ManyToOne
-    @JoinColumn(name="chave_pix")
-    private PixEntity chavePix;
+    @JoinColumn(name="id_usuario")
+    private PixEntity pixDebitor;
+    @Column(name = "chave_pix_creditor")
+    private String chavePixCreditor;
 
-     */
 
-    private Long idCreditor;
-
-    public TransacaoEntity () {}
-
-    public TransacaoEntity(Long id, StatusTransacao status, String descricaoErro, Calendar horaTranscao, UsuarioEntity debitor, PixEntity chavePix) {
-        this.id = id;
-        this.status = status;
-        this.descricaoErro = descricaoErro;
-        this.horaTranscao = horaTranscao;
-        //this.debitor = debitor;
-        //this.chavePix = chavePix;
+    public TransacaoEntity () {
+        this.horaTranscao = Calendar.getInstance();
     }
 
+    public TransacaoEntity(Long id, double valorTransacao, StatusTransacao status, String descricaoErro,
+                           Calendar horaTranscao, PixEntity pixDebitor, String chavePixCreditor) {
+        this.id = id;
+        this.valorTransacao = valorTransacao;
+        this.status = status;
+        this.descricaoErro = descricaoErro;
+        this.horaTranscao = Calendar.getInstance();
+        this.pixDebitor = pixDebitor;
+        this.chavePixCreditor = chavePixCreditor;
+    }
 
     public Long getId() {
         return id;
@@ -48,6 +45,14 @@ public class TransacaoEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public double getValorTransacao() {
+        return valorTransacao;
+    }
+
+    public void setValorTransacao(double valorTransacao) {
+        this.valorTransacao = valorTransacao;
     }
 
     public StatusTransacao getStatus() {
@@ -74,23 +79,19 @@ public class TransacaoEntity {
         this.horaTranscao = horaTranscao;
     }
 
-    /*
-    public UsuarioEntity getDebitor() {
-        return debitor;
+    public PixEntity getPixDebitor() {
+        return pixDebitor;
     }
 
-    public void setDebitor(UsuarioEntity debitor) {
-        this.debitor = debitor;
+    public void setPixDebitor(PixEntity pixDebitor) {
+        this.pixDebitor = pixDebitor;
     }
 
-
-    public PixEntity getChavePix() {
-        return chavePix;
+    public String getChavePixCreditor() {
+        return chavePixCreditor;
     }
 
-    public void setChavePix(PixEntity chavePix) {
-        this.chavePix = chavePix;
+    public void setChavePixCreditor(String chavePixCreditor) {
+        this.chavePixCreditor = chavePixCreditor;
     }
-
-     */
 }

@@ -4,6 +4,7 @@ import checkpoint.enums.TipoChave;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table (name="TB_PIX")
@@ -20,24 +21,33 @@ public class PixEntity {
     @ManyToOne
     @JoinColumn(name="id_usuario")
     private UsuarioEntity usuario;
-
-    /*
-    @OneToMany(mappedBy = "chavesPix")
-    @JoinColumn(name="id_transacao")
+    @OneToMany(mappedBy = "pixDebitor", cascade = CascadeType.PERSIST)
     private List<TransacaoEntity> transacoes;
-
-     */
 
 
     public PixEntity () {}
 
-    public PixEntity(Long id, TipoChave tipoChave, String valor, boolean ativa, UsuarioEntity usuario, List<TransacaoEntity> transacoes) {
+    public PixEntity(Long id, TipoChave tipoChave, String valor, UsuarioEntity usuario, List<TransacaoEntity> transacoes) {
         this.id = id;
         this.tipoChave = tipoChave;
         this.valor = valor;
-        this.ativa = ativa;
+        this.ativa = true;
         this.usuario = usuario;
-        //this.transacoes = transacoes;
+        this.transacoes = transacoes;
+    }
+
+    public PixEntity(Long id, TipoChave tipoChave, boolean ativa, UsuarioEntity usuario, List<TransacaoEntity> transacoes) {
+        String valor = null;
+        if (tipoChave == TipoChave.CHAVE_ALEATORIA) {
+            UUID uuid = UUID.randomUUID();
+            valor = uuid.toString();
+        }
+        this.id = id;
+        this.tipoChave = tipoChave;
+        this.valor = valor;
+        this.ativa = true;
+        this.usuario = usuario;
+        this.transacoes = transacoes;
     }
 
     public Long getId() {
@@ -80,7 +90,6 @@ public class PixEntity {
         this.usuario = usuario;
     }
 
-    /*
     public List<TransacaoEntity> getTransacoes() {
         return transacoes;
     }
@@ -88,5 +97,4 @@ public class PixEntity {
     public void setTransacoes(List<TransacaoEntity> transacoes) {
         this.transacoes = transacoes;
     }
-     */
 }

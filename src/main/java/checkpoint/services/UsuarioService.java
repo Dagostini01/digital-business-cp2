@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import checkpoint.exception.EmailJaUtilizadoException;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class UsuarioService {
 		return usuarioRepository.findById(id);
 	}
 
-	public UsuarioEntity inserirUsuario(UsuarioEntity user) throws CpfJaUtilizadoException {
+	public UsuarioEntity inserirUsuario(UsuarioEntity user) throws CpfJaUtilizadoException, EmailJaUtilizadoException {
 
 		String cpf = user.getCpf();
 		String email = user.getEmail();
@@ -37,11 +38,17 @@ public class UsuarioService {
 		validarCpf(cpf);
 		validarEmail(email);
 
-		UsuarioEntity usuarioExistente = usuarioRepository.findByCpf(cpf);
+		UsuarioEntity usuarioExistente = usuarioRepository.findByEmail(email);
 
 		if (usuarioExistente != null) {
-			throw new CpfJaUtilizadoException("O CPF " + cpf + " já está sendo utilizado");
+			throw new EmailJaUtilizadoException("O e-mail " + email + " já está sendo utilizado");
 		}
+
+		List<UsuarioEntity> usuarios = usuarioRepository.findByCpf(cpf);
+		if (usuarios.size() >= 3) {
+			throw new CpfJaUtilizadoException("O CPF " + cpf + "atingiu o limite de contas");
+		}
+
 
 		return usuarioRepository.save(user);
 
@@ -75,6 +82,11 @@ public class UsuarioService {
 			throw new IllegalArgumentException("usuario não foi removido, id não encontrado!");
 		}
 		
+	}
+
+	public void ativarDesativarConta(UsuarioEntity usuario) {
+		boolean status = usuario.isAtivo();
+		usuario.setAtivo(!status);
 	}
 
 }

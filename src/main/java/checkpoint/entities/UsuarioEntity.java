@@ -14,6 +14,7 @@ public class UsuarioEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_usuario")
 	private Long id;
+	private boolean ativo;
 	private String nome;
 	@Column(unique = true)
 	private String email;
@@ -32,11 +33,8 @@ public class UsuarioEntity {
 
 	@OneToMany(mappedBy = "usuario")
 	private List<ProdutoEntity> produtos;
-	/*
-	 * @OneToMany(mappedBy = "pix") private List<PixEntity> chavesPix;
-	 * 
-	 */
-
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<PixEntity> chaves;
 	@OneToOne(mappedBy = "usuario")
 	@JoinColumn(name = "vl_saldo")
 	private SaldoEntity saldo;
@@ -44,11 +42,11 @@ public class UsuarioEntity {
 	public UsuarioEntity() {
 	}
 
-	public UsuarioEntity(String nome, String email, String nomeMae, String senha, String telefone,
-			LocalDate dataNascimento, String enderecoCompleto, String cpf, String rg, Boolean pep, Double rendaMensal,
-			Double patrimonio, LocalDate dataCadastro, LocalDate dataAtualizacao, List<ProdutoEntity> produtos,
-			List<PixEntity> chaves, SaldoEntity saldo) {
-		super();
+	public UsuarioEntity(Long id, boolean ativo, String nome, String email, String nomeMae, String senha, String telefone, LocalDate dataNascimento,
+						 String enderecoCompleto, String cpf, String rg, Boolean politicamenteExposto, Double rendaMensal, Double patrimonio,
+						 LocalDate dataCadastro, LocalDate dataAtualizacao, List<ProdutoEntity> produtos, List<PixEntity> chaves, SaldoEntity saldo) {
+		this.id = id;
+		this.ativo = ativo;
 		this.nome = nome;
 		this.email = email;
 		this.nomeMae = nomeMae;
@@ -58,22 +56,14 @@ public class UsuarioEntity {
 		this.enderecoCompleto = enderecoCompleto;
 		this.cpf = cpf;
 		this.rg = rg;
-		this.politicamenteExposto = pep;
+		this.politicamenteExposto = politicamenteExposto;
 		this.rendaMensal = rendaMensal;
 		this.patrimonio = patrimonio;
 		this.dataCadastro = dataCadastro;
 		this.dataAtualizacao = dataAtualizacao;
 		this.produtos = produtos;
-		// this.chavesPix = chaves;
+		this.chaves = chaves;
 		this.saldo = saldo;
-	}
-
-	public List<ProdutoEntity> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(List<ProdutoEntity> produtos) {
-		this.produtos = produtos;
 	}
 
 	public Long getId() {
@@ -82,6 +72,14 @@ public class UsuarioEntity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public String getNome() {
@@ -124,6 +122,14 @@ public class UsuarioEntity {
 		this.telefone = telefone;
 	}
 
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
 	public String getEnderecoCompleto() {
 		return enderecoCompleto;
 	}
@@ -148,6 +154,14 @@ public class UsuarioEntity {
 		this.rg = rg;
 	}
 
+	public Boolean getPoliticamenteExposto() {
+		return politicamenteExposto;
+	}
+
+	public void setPoliticamenteExposto(Boolean politicamenteExposto) {
+		this.politicamenteExposto = politicamenteExposto;
+	}
+
 	public Double getRendaMensal() {
 		return rendaMensal;
 	}
@@ -162,14 +176,6 @@ public class UsuarioEntity {
 
 	public void setPatrimonio(Double patrimonio) {
 		this.patrimonio = patrimonio;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public LocalDate getDataCadastro() {
@@ -188,21 +194,21 @@ public class UsuarioEntity {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
-	public Boolean getPoliticamenteExposto() {
-		return politicamenteExposto;
+	public List<ProdutoEntity> getProdutos() {
+		return produtos;
 	}
 
-	public Boolean setPoliticamenteExposto(Boolean politicamenteExposto) {
-		return this.politicamenteExposto = politicamenteExposto;
+	public void setProdutos(List<ProdutoEntity> produtos) {
+		this.produtos = produtos;
 	}
-	/*
-	 * 
-	 * public List<PixEntity> getChavesPix() { return chavesPix; }
-	 * 
-	 * public void setChavesPix(List<PixEntity> chavesPix) { this.chavesPix =
-	 * chavesPix; }
-	 * 
-	 */
+
+	public List<PixEntity> getChaves() {
+		return chaves;
+	}
+
+	public void setChaves(List<PixEntity> chaves) {
+		this.chaves = chaves;
+	}
 
 	public SaldoEntity getSaldo() {
 		return saldo;
