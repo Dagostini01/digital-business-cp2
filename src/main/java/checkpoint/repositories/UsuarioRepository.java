@@ -8,4 +8,8 @@ import checkpoint.entities.UsuarioEntity;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
+	UsuarioEntity findByEmail(String email);
+
+	UsuarioEntity findByCpf(String cpf);
+
 }
