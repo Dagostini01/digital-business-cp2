@@ -81,8 +81,10 @@ public class UsuarioService {
 		} else {
 			throw new IllegalArgumentException("usuario não foi removido, id não encontrado!");
 		}
-		
+
+
 	}
+
 
 	public void ativarDesativarConta(UsuarioEntity usuario) {
 		boolean status = usuario.isAtivo();

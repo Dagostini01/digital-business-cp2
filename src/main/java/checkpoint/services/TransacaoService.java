@@ -9,6 +9,10 @@ import checkpoint.repositories.TransacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TransacaoService {
 
@@ -60,5 +64,23 @@ public class TransacaoService {
         transacao.setStatus(StatusTransacao.SUCESSO);
         transacaoRepository.save(transacao);
 
+    }
+
+    public List<TransacaoEntity> findAll() {
+        List<TransacaoEntity> transacoes = transacaoRepository.findAll();
+        return transacoes;
+    }
+
+    public List<TransacaoEntity> listarTransacoesUltimos7Dias() {
+        List<TransacaoEntity> transacoes = transacaoRepository.findAll();
+        List<TransacaoEntity> transacoesUltimosSeteDias = new ArrayList<>();
+        for (TransacaoEntity t : transacoes) {
+            int seteDiasAtras = LocalDateTime.now().getDayOfYear() - 7;
+            int ano = LocalDateTime.now().getYear();
+            if (ano == t.getHoraTranscao().getYear() && t.getHoraTranscao().getDayOfYear() > seteDiasAtras) {
+                transacoesUltimosSeteDias.add(t);
+            }
+        }
+        return transacoesUltimosSeteDias;
     }
 }
