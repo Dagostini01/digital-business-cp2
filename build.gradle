@@ -20,6 +20,9 @@ dependencies {
 	runtimeOnly group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.7.3'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '21.9.0.0'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+   	implementation 'io.springfox:springfox-swagger2:2.9.2'
+   	implementation group: 'commons-validator', name: 'commons-validator', version: '1.7'
 }
 
 tasks.named('test') {
