@@ -3,6 +3,7 @@ package checkpoint.entities;
 //teste
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -14,6 +15,7 @@ public class UsuarioEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_usuario")
 	private Long id;
+	private UUID uuid;
 	private boolean ativo;
 	private String nome;
 	@Column(unique = true)
@@ -40,12 +42,14 @@ public class UsuarioEntity {
 	private SaldoEntity saldo;
 
 	public UsuarioEntity() {
+		this.uuid = UUID.randomUUID();
 	}
 
 	public UsuarioEntity(Long id, boolean ativo, String nome, String email, String nomeMae, String senha, String telefone, LocalDate dataNascimento,
 						 String enderecoCompleto, String cpf, String rg, Boolean politicamenteExposto, Double rendaMensal, Double patrimonio,
 						 LocalDate dataCadastro, LocalDate dataAtualizacao, List<ProdutoEntity> produtos, List<PixEntity> chaves, SaldoEntity saldo) {
 		this.id = id;
+		this.uuid = UUID.randomUUID();
 		this.ativo = ativo;
 		this.nome = nome;
 		this.email = email;
@@ -216,5 +220,13 @@ public class UsuarioEntity {
 
 	public void setSaldo(SaldoEntity saldo) {
 		this.saldo = saldo;
+	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
 	}
 }
