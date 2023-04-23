@@ -14,6 +14,9 @@ public class PixService {
 
     public void cadastrarPix(PixEntity pix) throws ChaveJaCadastradaException{
         String valorChave = pix.getValor();
+        if (!pix.getUsuario().isAtivo()) {
+            throw new IllegalArgumentException("Usuário não está ativo");
+        }
 
         if (pixRepository.findByValor(valorChave) != null) {
             throw new ChaveJaCadastradaException("Chave já está sendo utilizada");

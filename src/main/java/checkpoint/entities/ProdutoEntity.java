@@ -9,6 +9,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "TB_PRODUTO")
 public class ProdutoEntity {
@@ -16,6 +18,7 @@ public class ProdutoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private UUID uuid;
 	private String nome;
 	private String dataCadastro;
 	private String dataAtualizacao;
@@ -27,12 +30,14 @@ public class ProdutoEntity {
 
 	public ProdutoEntity() {
 		super();
+		this.uuid = UUID.randomUUID();
 	}
 
 	public ProdutoEntity(Long id, String nome, String dataCadastro, String dataAtualizacao, Boolean habilitado,
 			UsuarioEntity usuario) {
 		super();
 		this.id = id;
+		this.uuid = UUID.randomUUID();
 		this.nome = nome;
 		this.dataCadastro = dataCadastro;
 		this.dataAtualizacao = dataAtualizacao;
@@ -88,4 +93,19 @@ public class ProdutoEntity {
 		this.usuario = usuario;
 	}
 
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	public Boolean getHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(Boolean habilitado) {
+		this.habilitado = habilitado;
+	}
 }
