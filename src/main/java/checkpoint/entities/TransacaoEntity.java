@@ -17,7 +17,7 @@ public class TransacaoEntity {
     private StatusTransacao status;
     private String descricaoErro;
     private Calendar horaTranscao;
-   
+    /*
     @OneToMany
     @JoinColumn(name="nome")
     private UsuarioEntity debitor;
@@ -26,7 +26,7 @@ public class TransacaoEntity {
     @JoinColumn(name="chave_pix")
     private PixEntity chavePix;
 
-   
+     */
 
     private Long idCreditor;
 
