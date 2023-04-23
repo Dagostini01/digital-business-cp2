@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "TB_PRODUTO")
 public class ProdutoEntity {
@@ -20,7 +22,23 @@ public class ProdutoEntity {
 	private Boolean habilitado;
 
 	@ManyToOne
+	@JsonIgnore
 	private UsuarioEntity usuario;
+
+	public ProdutoEntity() {
+		super();
+	}
+
+	public ProdutoEntity(Long id, String nome, String dataCadastro, String dataAtualizacao, Boolean habilitado,
+			UsuarioEntity usuario) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataCadastro = dataCadastro;
+		this.dataAtualizacao = dataAtualizacao;
+		this.habilitado = habilitado;
+		this.usuario = usuario;
+	}
 
 	public Long getId() {
 		return id;
