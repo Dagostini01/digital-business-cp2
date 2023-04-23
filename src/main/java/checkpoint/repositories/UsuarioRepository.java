@@ -5,11 +5,16 @@ import org.springframework.stereotype.Repository;
 
 import checkpoint.entities.UsuarioEntity;
 
+import java.util.List;
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
 	UsuarioEntity findByEmail(String email);
 
-	UsuarioEntity findByCpf(String cpf);
+	List<UsuarioEntity> findByCpf(String cpf);
+
+
+
 
 }

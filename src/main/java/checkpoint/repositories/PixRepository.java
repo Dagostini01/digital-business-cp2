@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PixRepository extends JpaRepository<PixEntity, Long> {
+    PixEntity findByValor(String valor);
 }
