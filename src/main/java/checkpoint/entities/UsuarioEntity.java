@@ -40,6 +40,7 @@ public class UsuarioEntity {
 	@OneToOne(mappedBy = "usuario")
 	@JoinColumn(name = "vl_saldo")
 	private SaldoEntity saldo;
+	private List<PixEntity> chavesPix;
 
 	public UsuarioEntity() {
 	}
@@ -64,7 +65,7 @@ public class UsuarioEntity {
 		this.dataCadastro = dataCadastro;
 		this.dataAtualizacao = dataAtualizacao;
 		this.produtos = produtos;
-		// this.chavesPix = chaves;
+		this.chavesPix = chaves;
 		this.saldo = saldo;
 	}
 
@@ -195,14 +196,14 @@ public class UsuarioEntity {
 	public Boolean setPoliticamenteExposto(Boolean politicamenteExposto) {
 		return this.politicamenteExposto = politicamenteExposto;
 	}
-	/*
-	 * 
-	 * public List<PixEntity> getChavesPix() { return chavesPix; }
-	 * 
-	 * public void setChavesPix(List<PixEntity> chavesPix) { this.chavesPix =
-	 * chavesPix; }
-	 * 
-	 */
+	
+	  
+	  public List<PixEntity> getChavesPix() { return chavesPix; }
+	  
+	  public void setChavesPix(List<PixEntity> chavesPix) { this.chavesPix =
+	  chavesPix; }
+
+	 
 
 	public SaldoEntity getSaldo() {
 		return saldo;
