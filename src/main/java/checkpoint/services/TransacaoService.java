@@ -1,18 +1,20 @@
 package checkpoint.services;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import checkpoint.entities.PixEntity;
 import checkpoint.entities.TransacaoEntity;
 import checkpoint.entities.UsuarioEntity;
 import checkpoint.enums.StatusTransacao;
 import checkpoint.repositories.PixRepository;
 import checkpoint.repositories.TransacaoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 
@@ -25,7 +27,7 @@ public class TransacaoService {
     private PixRepository pixRepository;
 
     @NotNull
-    public void realizarTransacao(@org.jetbrains.annotations.NotNull TransacaoEntity transacao) throws Exception{
+    public void realizarTransacao(@NotNull TransacaoEntity transacao) throws Exception{
 
         if (pixRepository.findByValor(transacao.getChavePixCreditor()) != null) {
             String msg = "Pix creditor não encontrado";
