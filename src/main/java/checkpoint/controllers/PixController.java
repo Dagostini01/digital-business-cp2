@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pix")
+@RequestMapping("/api/v1/pix")
 public class PixController {
 
     @Autowired

@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transacoes")
+@RequestMapping("/api/v1/transacoes")
 public class TransacaoController {
 
     @Autowired
