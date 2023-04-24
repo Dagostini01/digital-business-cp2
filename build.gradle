@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.7.11'
+	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -10,13 +10,20 @@ sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
+	maven { url "https://repo.spring.io/release" }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.3'
+	implementation 'org.springframework:spring-web:5.3.9'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.3'
+    implementation 'org.jetbrains:annotations:24.0.0'
+    runtimeOnly group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.7.3'
 	runtimeOnly 'com.h2database:h2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	runtimeOnly group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '21.9.0.0'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+   	implementation 'io.springfox:springfox-swagger2:2.9.2'
+   	implementation group: 'commons-validator', name: 'commons-validator', version: '1.7'
 }
 
 tasks.named('test') {
